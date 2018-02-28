@@ -1,5 +1,5 @@
 {
-  "name": "script-pull",
+  "name": "script-push",
   "scripts": {
     "start": "micro ."
   },

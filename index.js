@@ -33,15 +33,17 @@ module.exports = async (req, res) => {
 
   // Pipe file to s3
   const body = await buffer(req)
-  const scriptName = uuid.v4();
+  const scriptName = uuid.v4()
+  const key = 'scripts/' + scriptName
 
   const data = await upload({
-    Key: 'scripts/' + scriptName,
+    Key: key,
     Body: body
   })
 
   // Add URL to mongo
   const script = new Script({
+    key,
     url: data.Location,
     owner: team
   })

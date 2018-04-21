@@ -21,9 +21,6 @@ const s3 = new AWS.S3({
 const upload = promisify(s3.upload.bind(s3))
 
 module.exports = authenticate(async (req, res) => {
-  // console.log(req)
-  // console.log(re)
-  // console.log
   const urlParams = req.url.split('/')
   if(urlParams.length !== 2) {
     return send(res, 400, 'Malformed URL')

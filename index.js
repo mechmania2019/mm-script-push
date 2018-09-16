@@ -21,7 +21,8 @@ const s3 = new AWS.S3({
 const upload = promisify(s3.upload.bind(s3));
 
 module.exports = authenticate(async (req, res) => {
-  const team = req.user.name;
+  const team = req.user;
+  console.log(`${team.name} - Start uploading script`);
 
   // Pipe file to s3
   const body = await buffer(req, { limit: "10mb" });
@@ -31,27 +32,33 @@ module.exports = authenticate(async (req, res) => {
   const scriptName = uuid.v4();
   const key = "scripts/" + scriptName;
 
+  console.log(`${team.name} - Upload to s3 (${key})`);
   const data = await upload({
     Key: key,
     Body: body
   });
+  console.log(`${team.name} - Uploaded to s3 (${data.Location})`);
 
   // Add URL to mongo
+  console.log(`${team.name} - Add to mongo (${key})`);
   const script = new Script({
     key,
     url: data.Location,
-    owner: team
+    owner: team.id
   });
+  console.log(`${team.name} - Saving script`);
   await script.save();
-  team.latestScript = script;
+  console.log(`${team.name} - Added to mongo (${script.id})`);
+  team.latestScript = script.id;
   await team.save();
-
-  console.log(data.key);
-
+  console.log(`${team.name} - Updated team latestScript (${team.latestScript})`);
+  
+  console.log(`${team.name} - Notifying ${COMPILER_QUEUE}`);
   const conn = await amqp.connect(RABBITMQ_URI);
   const ch = await conn.createChannel();
   ch.assertQueue(COMPILER_QUEUE, { durable: true });
   ch.sendToQueue(COMPILER_QUEUE, new Buffer(data.key), { persistent: true });
+  console.log(`${team.name} - Notified ${COMPILER_QUEUE}`);
 
   send(res, 200, script);
 });

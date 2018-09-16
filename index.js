@@ -37,7 +37,7 @@ module.exports = authenticate(async (req, res) => {
   // Add URL to mongo
   console.log(`${team.name} - Add to mongo (${key})`);
   const script = new Script({
-    key,
+    key: scriptName,
     url: data.Location,
     owner: team.id
   });

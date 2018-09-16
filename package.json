@@ -1,7 +1,8 @@
 {
   "name": "script-push",
   "scripts": {
-    "start": "micro ."
+    "start": "micro .",
+    "deploy": "./deploy.sh"
   },
   "dependencies": {
     "amqplib": "^0.5.2",

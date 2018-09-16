@@ -83,6 +83,10 @@ core-util-is@~1.0.0:
   version "1.0.2"
   resolved "https://registry.npmjs.org/core-util-is/-/core-util-is-1.0.2.tgz#b5fd54220aa2bc5ab57aab7140c940754503c1a7"
 
+cuid@2.1.4:
+  version "2.1.4"
+  resolved "https://registry.yarnpkg.com/cuid/-/cuid-2.1.4.tgz#e1178eb92a05ef9364b29a9942feed36d3604cdd"
+
 debug@2.6.9:
   version "2.6.9"
   resolved "https://registry.npmjs.org/debug/-/debug-2.6.9.tgz#5d128515df134ff327e90a4c93f4e077a536341f"
@@ -144,6 +148,10 @@ jmespath@0.15.0:
   version "0.15.0"
   resolved "https://registry.npmjs.org/jmespath/-/jmespath-0.15.0.tgz#a3f222a9aae9f966f5d27c796510e28091764217"
 
+kareem@2.0.5:
+  version "2.0.5"
+  resolved "http://registry.npmjs.org/kareem/-/kareem-2.0.5.tgz#437e1e40f1be304ee21b3e4790eb3a05418b35ca"
+
 kareem@2.0.6:
   version "2.0.6"
   resolved "https://registry.npmjs.org/kareem/-/kareem-2.0.6.tgz#011ed59fd718bb147c63141a799fc888cd5a211b"
@@ -165,21 +173,28 @@ micro@^9.1.0:
     mri "1.1.0"
     raw-body "2.3.2"
 
-mm-authenticate@0.0.1:
-  version "0.0.1"
-  resolved "https://registry.yarnpkg.com/mm-authenticate/-/mm-authenticate-0.0.1.tgz#68b69795b6dc2f0dbdac988f4779861af0e50acb"
+mm-authenticate@0.0.2:
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/mm-authenticate/-/mm-authenticate-0.0.2.tgz#8845314a9460734dc0f93405694eae6ea45c2bd7"
   dependencies:
     micro "^9.1.0"
-    mm-schemas "0.0.1"
+    mm-schemas "0.0.2"
 
-mm-schemas@0.0.1:
-  version "0.0.1"
-  resolved "https://registry.yarnpkg.com/mm-schemas/-/mm-schemas-0.0.1.tgz#e40a091ff74ae5d22076918f3572eeef52672ae2"
+mm-schemas@0.0.2:
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/mm-schemas/-/mm-schemas-0.0.2.tgz#2853f0c94e29a85c71676f915a42e90d94f61886"
   dependencies:
-    mongoose "^5.0.7"
-    mongoose-timestamp "^0.6.0"
-    uuid "^3.2.1"
-    validator "^9.4.1"
+    cuid "2.1.4"
+    mongoose "5.0.7"
+    mongoose-timestamp "0.6.0"
+    validator "9.4.1"
+
+mongodb-core@3.0.2:
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/mongodb-core/-/mongodb-core-3.0.2.tgz#914896092dd45427d9a4f98a7997a0bfb81d163b"
+  dependencies:
+    bson "~1.0.4"
+    require_optional "^1.0.1"
 
 mongodb-core@3.0.6:
   version "3.0.6"
@@ -187,6 +202,12 @@ mongodb-core@3.0.6:
   dependencies:
     bson "~1.0.4"
     require_optional "^1.0.1"
+
+mongodb@3.0.2:
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/mongodb/-/mongodb-3.0.2.tgz#28172302ed4e9388d8091e2cc4618057e6f5debc"
+  dependencies:
+    mongodb-core "3.0.2"
 
 mongodb@3.0.6:
   version "3.0.6"
@@ -198,11 +219,27 @@ mongoose-legacy-pluralize@1.0.2:
   version "1.0.2"
   resolved "https://registry.npmjs.org/mongoose-legacy-pluralize/-/mongoose-legacy-pluralize-1.0.2.tgz#3ba9f91fa507b5186d399fb40854bff18fb563e4"
 
-mongoose-timestamp@^0.6.0:
+mongoose-timestamp@0.6.0:
   version "0.6.0"
-  resolved "https://registry.npmjs.org/mongoose-timestamp/-/mongoose-timestamp-0.6.0.tgz#da54110ca8e6d4c2b9957a0366836c362ed272be"
+  resolved "https://registry.yarnpkg.com/mongoose-timestamp/-/mongoose-timestamp-0.6.0.tgz#da54110ca8e6d4c2b9957a0366836c362ed272be"
   dependencies:
     defaults "^1.0.3"
+
+mongoose@5.0.7:
+  version "5.0.7"
+  resolved "http://registry.npmjs.org/mongoose/-/mongoose-5.0.7.tgz#7c20a3c734ef4e8999f150e5a48e97dfa3f06951"
+  dependencies:
+    async "2.1.4"
+    bson "~1.0.4"
+    kareem "2.0.5"
+    lodash.get "4.4.2"
+    mongodb "3.0.2"
+    mongoose-legacy-pluralize "1.0.2"
+    mpath "0.3.0"
+    mquery "3.0.0"
+    ms "2.0.0"
+    regexp-clone "0.0.1"
+    sliced "1.0.1"
 
 mongoose@^5.0.7:
   version "5.0.15"
@@ -219,6 +256,10 @@ mongoose@^5.0.7:
     ms "2.0.0"
     regexp-clone "0.0.1"
     sliced "1.0.1"
+
+mpath@0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/mpath/-/mpath-0.3.0.tgz#7a58f789e9b5fd3c94520634157960f26bd5ef44"
 
 mpath@0.4.1:
   version "0.4.1"
@@ -337,13 +378,9 @@ uuid@3.1.0:
   version "3.1.0"
   resolved "https://registry.npmjs.org/uuid/-/uuid-3.1.0.tgz#3dd3d3e790abc24d7b0d3a034ffababe28ebbc04"
 
-uuid@^3.2.1:
-  version "3.2.1"
-  resolved "https://registry.npmjs.org/uuid/-/uuid-3.2.1.tgz#12c528bb9d58d0b9265d9a2f6f0fe8be17ff1f14"
-
-validator@^9.4.1:
+validator@9.4.1:
   version "9.4.1"
-  resolved "https://registry.npmjs.org/validator/-/validator-9.4.1.tgz#abf466d398b561cd243050112c6ff1de6cc12663"
+  resolved "http://registry.npmjs.org/validator/-/validator-9.4.1.tgz#abf466d398b561cd243050112c6ff1de6cc12663"
 
 xml2js@0.4.17:
   version "0.4.17"

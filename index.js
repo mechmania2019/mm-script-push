@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 const AWS = require("aws-sdk");
 const uuid = require("node-uuid");
 const authenticate = require("mm-authenticate")(mongoose);
-const { Team, Script } = require("mm-schemas")(mongoose);
+const { Script } = require("mm-schemas")(mongoose);
 const { send, buffer } = require("micro");
 
 const amqp = require("amqplib");

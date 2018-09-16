@@ -24,18 +24,13 @@ module.exports = authenticate(async (req, res) => {
   const team = req.user;
   console.log(`${team.name} - Start uploading script`);
 
-  // Pipe file to s3
-  const body = await buffer(req, { limit: "10mb" });
-  if (!body) {
-    return send(res, 400, "No script to push");
-  }
   const scriptName = uuid.v4();
   const key = "scripts/" + scriptName;
 
   console.log(`${team.name} - Upload to s3 (${key})`);
   const data = await upload({
     Key: key,
-    Body: body
+    Body: req
   });
   console.log(`${team.name} - Uploaded to s3 (${data.Location})`);
 

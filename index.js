@@ -22,15 +22,13 @@ const upload = promisify(s3.upload.bind(s3))
 
 module.exports = authenticate(async (req, res) => {
   const urlParams = req.url.split('/')
-  if(urlParams.length !== 2) {
+  if(urlParams.length !== 3) {
     return send(res, 400, 'Malformed URL')
   }
-  const [_, name] = urlParams
-  console.log(name)
-
+  const [_, name, token] = urlParams
   // Find team
-  const team = await Team.findOne({name}).exec()
-
+  const team = await Team.findOne({token}).exec()
+ 
 
   if(!team) {
     return send(res, 404, `Team ${name} not found`)
@@ -41,10 +39,12 @@ module.exports = authenticate(async (req, res) => {
   }
 
   // // Pipe file to s3
-  const body = await buffer(req)
+  const body = await buffer(req, {limit: '10mb'})
+  if (!body){
+    return send(res, 401, 'No script to push')
+  }
   const scriptName = uuid.v4()
   const key = 'scripts/' + scriptName
-
 
   const data = await upload({
     Key: key,
@@ -61,7 +61,7 @@ module.exports = authenticate(async (req, res) => {
   team.latestScript = script
   await team.save()
 
-  // console.log(data.key)
+  console.log(data.key)
 
   const conn = await amqp.connect(RABBITMQ_URI);
   const ch = await conn.createChannel();

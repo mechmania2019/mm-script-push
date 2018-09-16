@@ -57,7 +57,7 @@ module.exports = authenticate(async (req, res) => {
   const conn = await amqp.connect(RABBITMQ_URI);
   const ch = await conn.createChannel();
   ch.assertQueue(COMPILER_QUEUE, { durable: true });
-  ch.sendToQueue(COMPILER_QUEUE, new Buffer(data.key), { persistent: true });
+  ch.sendToQueue(COMPILER_QUEUE, Buffer.from(data.key), { persistent: true });
   console.log(`${team.name} - Notified ${COMPILER_QUEUE}`);
 
   send(res, 200, script);

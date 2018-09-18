@@ -1,5 +1,5 @@
 {
-  "name": "script-compiled-pull",
+  "name": "script-push",
   "scripts": {
     "start": "micro .",
     "deploy": "./deploy.sh"

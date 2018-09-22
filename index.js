@@ -20,6 +20,9 @@ const s3 = new AWS.S3({
 
 const upload = promisify(s3.upload.bind(s3));
 
+const connP = amqp.connect(RABBITMQ_URI);
+const chP = connP.then(conn => conn.createChannel());
+
 module.exports = authenticate(async (req, res) => {
   const team = req.user;
   console.log(`${team.name} - Start uploading script`);
@@ -46,11 +49,12 @@ module.exports = authenticate(async (req, res) => {
   console.log(`${team.name} - Added to mongo (${script.id})`);
   team.latestScript = script.id;
   await team.save();
-  console.log(`${team.name} - Updated team latestScript (${team.latestScript})`);
-  
+  console.log(
+    `${team.name} - Updated team latestScript (${team.latestScript})`
+  );
+
   console.log(`${team.name} - Notifying ${COMPILER_QUEUE}`);
-  const conn = await amqp.connect(RABBITMQ_URI);
-  const ch = await conn.createChannel();
+  const ch = await chP;
   ch.assertQueue(COMPILER_QUEUE, { durable: true });
   ch.sendToQueue(COMPILER_QUEUE, Buffer.from(scriptName), { persistent: true });
   console.log(`${team.name} - Notified ${COMPILER_QUEUE}`);

@@ -57,7 +57,7 @@ module.exports = authenticate(async (req, res) => {
   console.log(`${team.name} - Notifying ${COMPILER_QUEUE}`);
   const ch = await chP;
   ch.assertQueue(COMPILER_QUEUE, { durable: true });
-  ch.sendToQueue(COMPILER_QUEUE, Buffer.from(scriptName), { persistent: true });
+  ch.sendToQueue(COMPILER_QUEUE, JSON.stringify(script), { persistent: true });
   console.log(`${team.name} - Notified ${COMPILER_QUEUE}`);
 
   send(res, 200, script);

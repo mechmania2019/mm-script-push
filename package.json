@@ -9,7 +9,7 @@
     "aws-sdk": "^2.203.0",
     "micro": "^9.1.0",
     "mm-authenticate": "0.0.2",
-    "mm-schemas": "0.0.2",
+    "mm-schemas": "0.0.7",
     "mongoose": "^5.0.7",
     "node-uuid": "^1.4.8"
   }

@@ -189,6 +189,16 @@ mm-schemas@0.0.2:
     mongoose-timestamp "0.6.0"
     validator "9.4.1"
 
+mm-schemas@0.0.7:
+  version "0.0.7"
+  resolved "https://registry.yarnpkg.com/mm-schemas/-/mm-schemas-0.0.7.tgz#21b72b2e49b32312ad989d7c120667a003e98035"
+  integrity sha512-DWsWZ5JtPNtl9B0Mxr8HSF9+6Az7hngfwD17QA2RfQazGyQqRQmzYHKsjVGUOmOAZkSmOn0D4HWasPE2dGzjaA==
+  dependencies:
+    cuid "2.1.4"
+    mongoose "5.0.7"
+    mongoose-timestamp "0.6.0"
+    validator "9.4.1"
+
 mongodb-core@3.0.2:
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/mongodb-core/-/mongodb-core-3.0.2.tgz#914896092dd45427d9a4f98a7997a0bfb81d163b"

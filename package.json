@@ -10,7 +10,7 @@
     "micro": "9.1.0",
     "mm-authenticate": "0.0.9",
     "mm-schemas": "0.0.9",
-    "mongoose": "5.0.7",
+    "mongoose": "5.7.1",
     "node-uuid": "1.4.8"
   }
 }

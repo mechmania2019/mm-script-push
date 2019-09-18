@@ -47,6 +47,11 @@ module.exports = authenticate(async (req, res) => {
   console.log(`${team.name} - Saving script`);
   await script.save();
   console.log(`${team.name} - Added to mongo (${script.id})`);
+  team.mostRecentPush = script.id;
+  await team.save();
+  console.log(
+    `${team.name} - Updated team most recent push (${team.mostRecentPush})`
+  );
 
   console.log(`${team.name} - Notifying ${COMPILER_QUEUE}`);
   const ch = await chP;

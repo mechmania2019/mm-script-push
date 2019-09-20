@@ -11,8 +11,7 @@ const amqp = require("amqplib");
 const RABBITMQ_URI = process.env.RABBITMQ_URI || "amqp://localhost";
 const COMPILER_QUEUE = `compilerQueue`;
 
-mongoose.connect(process.env.MONGO_URL, { useNewUrlParser: true, useUnifiedTopology: true });
-mongoose.set('useCreateIndex', true);
+mongoose.connect(process.env.MONGO_URL, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true });
 mongoose.Promise = global.Promise;
 
 const s3 = new AWS.S3({
